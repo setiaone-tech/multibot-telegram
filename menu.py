@@ -4,8 +4,8 @@ _INFORMATION_
 */wiki [cari]* = Pencarian melalui wikipedia.
 */brainly [cari]* = Mencari jawaban melalui brainly.
 */lirik [judul]* = Mencari lirik lagu berdasarkan judul.
-*/cuaca [daerah] = Menampilkan cuaca di daerah berdasarkan pencarian.
-*/sholat [daerah] = Menampilkan jadwal sholat di daerah berdasarkan pencarian.
+*/cuaca [daerah]* = Menampilkan cuaca di daerah berdasarkan pencarian.
+*/sholat [daerah]* = Menampilkan jadwal sholat di daerah berdasarkan pencarian.
 
 _ENTERTAINTMENT_
 */meme* = Random meme.
@@ -29,7 +29,7 @@ _RANDOM TEXT_
 _RANDOM IMAGE_
 */bts* = Menampilkan foto BTS secara random.
 */exo* = Menampilkan foro EXO secara random.
-*blackpink* = Menampilkan foto BLACKPINK secara random.
+*/blackpink* = Menampilkan foto BLACKPINK secara random.
 */animefanart* = Menampilkan gambar anime dalam bentuk fanart.
 */wpanime* = Menampilkan wallpaper anime secara random.
 */wpsearch [cari]* = Mencari wallpaper berdasasrkan pencarian.
@@ -56,5 +56,8 @@ _DOWNLOADER_
 
 
 _note_ : ``` Jika dalam perintah terdapat (spasi) harap digunakan!.```
+         ``` [id-yt] adalah id dalam url youtube, contoh link https://youtu.be/CEKTES maka id CEKTES```
+         ``` [id-joox] adalah id dalam url joox, contoh link https://www.joox.com/id/singlle/CeKcekTesT3s== maka id CeKcekTesT3s==```
+         
         """)
         return menus
