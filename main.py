@@ -11,13 +11,13 @@ def log(message):
     nama_awal = message.chat.first_name
     nama_akhir = message.chat.last_name
     ttd = datetime.datetime.now().strftime('%d-%B-%Y')
-    text_log = '{}, {} {}, {}\n'.format(ttd, nama_awal, nama_akhir)
+    text_log = '{}, {}, {}\n'.format(ttd, nama_awal, nama_akhir)
     log_bot = open('log_bot.txt', 'a')
     log_bot.write(text_log)
     log_bot.close()
     
 
-api = "1557818563:AAFl9hb7mRPtXbJxD6l3LOsM8ynmbEFPGGc"
+api = "API-KEY"
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -25,11 +25,12 @@ headers = {
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
+    log(message)
     bot.reply_to(message, "Ketik /menu untuk melihat full command ya")
     
 @bot.message_handler(commands=['menu'])
 def send_menu(message):
-    bot.reply_to(message, Menu(), parse_mode='HTML')
+    bot.reply_to(message, Menu(), parse_mode='Markdown')
 
 @bot.message_handler(commands=['wiki'])
 def send_wiki(message):
@@ -460,10 +461,81 @@ def send_steel3d(message):
         photo = open('steel/'+nam+'steel.png', 'rb')
         bot.send_photo(chat_id, photo)
         
+@bot.message_handler(commands=['ytaudio'])
+def send_ytaudio(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    cari = bagi.split(" ",1)
+    url = "http://lolhuman.herokuapp.com/api/ytaudio/"+cari[1]
+    hasil = ses.get(url).json()
+    if hasil['status'] == 200:
+        judul = hasil['result']['title']
+        bit = hasil['result'][1]['bitrate']
+        ukuran = hasil['result'][1]['size']
+        bot.send_video(chat_id, hasil['result'][1]['link'], 'Judul : '+judul+'\nBit : '+bit+'\nUkuran : '+ukuran)
+    else:
+        bot.send_message(chat_id, hasil['message'])
+        
+@bot.message_handler(commands=['ytvideo'])
+def send_ytvideo(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    cari = bagi.split(" ",1)
+    url = "http://lolhuman.herokuapp.com/api/ytvideo/"+cari[1]
+    hasil = ses.get(url).json()
+    if hasil['status'] == 200:
+        judul = hasil['result']['title']
+        resolusi = hasil['result'][0]['resolution']
+        ukuran = hasil['result'][0]['size']
+        bot.send_video(chat_id, hasil['result'][0]['link'], 'Judul : '+judul+'\nResolusi : '+resolusi+'\nUkuran : '+ukuran)
+    else:
+        bot.send_message(chat_id, hasil['message'])
+        
+@bot.message_handler(commands=['joox'])
+def send_joox(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    cari = bagi.split(" ",1)
+    url = "http://lolhuman.herokuapp.com/api/joox/"+cari[1]
+    hasil = ses.get(url).json()
+    if hasil['status'] == 200:
+        penyanyi = hasil['result']['info']['singer']
+        judul = hasil['result']['info']['song']
+        album = hasil['result']['info']['album']
+        rilis = hasil['result']['info']['date']
+        bot.send_photo(chat_id, hasil['result']['image'], 'Penyanyi : '+penyanyi+'\nJudul : '+judul+'\nAlbum : '+album+'\nRilis : '+rilis)
+        bot.send_audio(chat_id, hasil['result']['audio']['192'])
+    else:
+        bot.send_message(chat_id, hasil['message'])
+        
+@bot.message_handler(commands=['ig'])
+def send_ig(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    cari = bagi.split(" ",1)
+    url = "http://lolhuman.herokuapp.com/api/instagram?url="+cari[1]
+    hasil = ses.get(url).json()
+    if hasil['status'] == 200:
+        bot.send_video(chat_id, hasil['result'])
+    else:
+        bot.send_message(chat_id, hasil['message'])
+        
+@bot.message_handler(commands=['soundcloud'])
+def send_soundcloud(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    cari = bagi.split(" ",1)
+    url = "http://lolhuman.herokuapp.com/api/soundcloud?url="+cari[1]
+    hasil = ses.get(url).json()
+    if hasil['status'] == 200:
+        bot.send_video(chat_id, hasil['result'], hasil['title'])
+    else:
+        bot.send_message(chat_id, hasil['message'])
+        
 while True:
   try:
+    print(str(datetime.datetime.now().hour)+'.'+str(datetime.datetime.now().minute)+' ==> Bot Running....')
     bot.polling()
-    print('Bot Running....')
   except:
-    bot.stop_polling()
     print('Bot Stopping....')
+    bot.stop_polling()
