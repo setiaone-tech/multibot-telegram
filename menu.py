@@ -1,39 +1,60 @@
 def Menu():
         menus = ("""
-<b>/wiki [cari]</b> = Pencarian melalui wikipedia.
-<b>/brainly [cari]</b> = Mencari jawaban melalui brainly.
-<b>/lirik [judul]</b> = Mencari lirik lagu berdasarkan judul.
-<b>/cuaca [daerah]</b> = Menampilkan cuaca di daerah berdasarkan pencarian.
-<b>/sholat [daerah]</b> = Menampilkan jadwal sholat di daerah berdasarkan pencarian.
-<b>/meme</b> = Random meme.
-<b>/quotes</b> = Random Quotes.
-<b>/artinama [nama]</b> = Menampilkan arti nama dari sesorang berdasarkan pencarian.
-<b>/jodoh [pria] [wanita]</b> = Dukun cinta berdasasrkan nama pasangan.
-<b>/weton [tgl] [bln] [thn]</b> = Menampilkan weton berdasarkan tanggal-bulan-tahun kelahiran.
-<b>/jadian [tgl] [bln] [thn]</b> = Dukun cinta berdasarkan tanggal jadian.
-<b>/quotenime</b> = Menampilan quotes dari anime secara random.
-<b>/faktaunik</b> = Menampilkan faktu unik secara random.
-<b>/katabijak</b> = Menampilkan kata bijak secara random.
-<b>/pantun</b> = Menampilan pantun secara random.
-<b>/bucin</b> = Menampilkan kata-kata bucin v1.0.
-<b>/bucinn</b> = Menampilkan kata-kata bucin v2.0.
-<b>/twt [link-video]</b> = Mendownload video dari twitter.
-<b>/wancak</b> = Menampilkan meme dari 1cak.
-<b>/bts</b> = Menampilkan foto BTS secara random.
-<b>/exo</b> = Menampilkan foro EXO secara random.
-<b>blackpink</b> = Menampilkan foto BLACKPINK secara random.
-<b>/animefanart</b> = Menampilkan gambar anime dalam bentuk fanart.
-<b>/wpanime</b> = Menampilkan wallpaper anime secara random.
-<b>/wpsearch [cari]</b> = Mencari wallpaper berdasasrkan pencarian.
-<b>/pinterest [cari]</b> = Mencari gambar dari pinterest berdasarkan pencarian.
-<b>/phub [teks1] [teks2]</b> = Membuat logo/tulisan PORNHUB dengan teks inputan dari user.
-<b>/glitch [teks1] [teks2]</b> = Membuat logo/tulisan GLITCH dengan teks inputan dari user.
-<b>/avenger [teks1] [teks2]</b> = Membuat logo/tulisan AVENGER dengan teks inputan dari user.
-<b>/space [teks1] [teks2]</b> = Membuat logo/tulisan SPACE dengan teks inputan dari user.
-<b>/ninja [teks1] [teks2]</b> = Membuat logo/tulisan NINJA LOGO dengan teks inputan dari user.
-<b>/marvel [teks1] [teks2]</b> = Membuat logo/tulisan MARVEL STUDIO dengan teks inputan dari user.
-<b>/lion [teks1] [teks2]</b> = Membuat logo/tulisan LION LOGO dengan teks inputan dari user.
-<b>/wolf [teks1] [teks2]</b> = Membuat logo/tulisan WOLF LOGO dengan teks inputan dari user.
-<b>/steel3d [teks1] [teks2]</b> = Membuat logo/tulisan STEEL3D dengan teks inputan dari user.
+_INFORMATION_
+*/wiki [cari]* = Pencarian melalui wikipedia.
+*/brainly [cari]* = Mencari jawaban melalui brainly.
+*/lirik [judul]* = Mencari lirik lagu berdasarkan judul.
+*/cuaca [daerah] = Menampilkan cuaca di daerah berdasarkan pencarian.
+*/sholat [daerah] = Menampilkan jadwal sholat di daerah berdasarkan pencarian.
+
+_ENTERTAINTMENT_
+*/meme* = Random meme.
+*/wancak* = Menampilkan meme dari 1cak.
+
+_PRIMBON_
+*/artinama [nama]* = Menampilkan arti nama dari sesorang berdasarkan pencarian.
+*/jodoh [pria] [wanita]* = Dukun cinta berdasasrkan nama pasangan.
+*/weton [tgl] [bln] [thn]* = Menampilkan weton berdasarkan tanggal-bulan-tahun kelahiran.
+*/jadian [tgl] [bln] [thn]* = Dukun cinta berdasarkan tanggal jadian.
+
+_RANDOM TEXT_
+*/quotes* = Random Quotes.
+*/quotenime* = Menampilan quotes dari anime secara random.
+*/faktaunik* = Menampilkan faktu unik secara random.
+*/katabijak* = Menampilkan kata bijak secara random.
+*/pantun* = Menampilan pantun secara random.
+*/bucin* = Menampilkan kata-kata bucin v1.0.
+*/bucinn* = Menampilkan kata-kata bucin v2.0.
+
+_RANDOM IMAGE_
+*/bts* = Menampilkan foto BTS secara random.
+*/exo* = Menampilkan foro EXO secara random.
+*blackpink* = Menampilkan foto BLACKPINK secara random.
+*/animefanart* = Menampilkan gambar anime dalam bentuk fanart.
+*/wpanime* = Menampilkan wallpaper anime secara random.
+*/wpsearch [cari]* = Mencari wallpaper berdasasrkan pencarian.
+*/pinterest [cari]* = Mencari gambar dari pinterest berdasarkan pencarian.
+
+_TEXT EDITOR_
+*/phub [teks1] [teks2]* = Membuat logo/tulisan PORNHUB dengan teks inputan dari user.
+*/glitch [teks1] [teks2]* = Membuat logo/tulisan GLITCH dengan teks inputan dari user.
+*/avenger [teks1] [teks2]* = Membuat logo/tulisan AVENGER dengan teks inputan dari user.
+*/space [teks1] [teks2]* = Membuat logo/tulisan SPACE dengan teks inputan dari user.
+*/ninja [teks1] [teks2]* = Membuat logo/tulisan NINJA LOGO dengan teks inputan dari user.
+*/marvel [teks1] [teks2]* = Membuat logo/tulisan MARVEL STUDIO dengan teks inputan dari user.
+*/lion [teks1] [teks2]* = Membuat logo/tulisan LION LOGO dengan teks inputan dari user.
+*/wolf [teks1] [teks2]* = Membuat logo/tulisan WOLF LOGO dengan teks inputan dari user.
+*/steel3d [teks1] [teks2]* = Membuat logo/tulisan STEEL3D dengan teks inputan dari user.
+
+_DOWNLOADER_
+*/ytaudio [id-yt]* = Mendownload lagu dari youtube.
+*/ytvideo [id-yt]* = Mendownload video dari youtube.
+*/joox [id-joox]* = Mendownload lagu dari joox.
+*/ig [link-postingan]* = Mendownload video dari instagram.
+*/twt [link-video]* = Mendownload video dari twitter.
+*/souncloud [link]* = Mendownload lagu dari soundcloud.
+
+
+_note_ : ``` Jika dalam perintah terdapat (spasi) harap digunakan!.```
         """)
         return menus
