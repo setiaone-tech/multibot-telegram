@@ -4,6 +4,7 @@ from menu import Menu
 from PIL import Image
 from io import BytesIO
 import datetime
+from telebot import util
 
 ses = requests.session()
 
@@ -18,7 +19,7 @@ def log(message):
     log_bot.close()
     
 
-api = "API-KEY"
+api = "1308184622:AAHXswbVtZaCEe1cKxJ9bmubS-uEdq1ygWs"
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -32,7 +33,9 @@ def send_welcome(message):
 @bot.message_handler(commands=['menu'])
 def send_menu(message):
     log(message)
+    chat_id = message.chat.id
     bot.reply_to(message, Menu(), parse_mode='Markdown')
+    bot.send_message(chat_id, 'Ingin berdonasi? langsung klik <a href="https://saweria.co/DPNoober">disini</a>', parse_mode='HTML')
 
 @bot.message_handler(commands=['wiki'])
 def send_wiki(message):
@@ -76,7 +79,12 @@ def send_lirik(message):
         url = "http://lolhuman.herokuapp.com/api/lirik/"+cari[1]
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
-            bot.send_message(chat_id, hasil['result'])
+            split_text = util.split_string(hasil['result'], 3000)
+            if len(split_text) > 1:
+                for text in split_text:
+                    bot.send_message(chat_id, text)
+            else:
+                bot.send_message(chat_id, hasil['result'])
         else:
             bot.send_message(chat_id, hasil['message'])
     else:
@@ -557,7 +565,8 @@ def send_ytvideo(message):
             video = ses.get(hasil['result'][0]['link']).content
             resolusi = hasil['result'][0]['resolution']
             ukuran = hasil['result'][0]['size']
-            bot.send_video(chat_id, video, 'Judul : '+judul+'\nResolusi : '+resolusi+'\nUkuran : '+ukuran)
+            bot.send_video(chat_id, video)
+            bot.send_message(chat_id, 'Judul : '+judul+'\nResolusi : '+resolusi+'\nUkuran : '+ukuran)
         else:
             bot.send_message(chat_id, hasil['message'])
     else:
