@@ -5,6 +5,7 @@ from PIL import Image
 from io import BytesIO
 import datetime
 from telebot import util
+import random
 
 ses = requests.session()
 
@@ -19,7 +20,7 @@ def log(message):
     log_bot.close()
     
 
-api = "1308184622:AAHXswbVtZaCEe1cKxJ9bmubS-uEdq1ygWs"
+api = "API-KEY"
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -35,7 +36,9 @@ def send_menu(message):
     log(message)
     chat_id = message.chat.id
     bot.reply_to(message, Menu(), parse_mode='Markdown')
-    bot.send_message(chat_id, 'Ingin berdonasi? langsung klik <a href="https://saweria.co/DPNoober">disini</a>', parse_mode='HTML')
+    ran = random.randint(0, 1)
+    if ran == 0:
+        bot.send_message(chat_id, 'Ingin berdonasi? langsung klik <a href="https://saweria.co/DPNoober">disini</a>', parse_mode='HTML')
 
 @bot.message_handler(commands=['wiki'])
 def send_wiki(message):
@@ -616,15 +619,77 @@ def send_soundcloud(message):
         url = "http://lolhuman.herokuapp.com/api/soundcloud?url="+cari[1]
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
-            bot.send_video(chat_id, hasil['result'], hasil['title'])
+            bot.send_audio(chat_id, hasil['result'], hasil['title'])
         else:
             bot.send_message(chat_id, hasil['message'])
     else:
         bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
         
+@bot.message_handler(commands=['tiktokmp4'])
+def send_tiktokmp4(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/tiktok?url="+cari[1]
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            judul = hasil['result']['title']
+            desc = hasil['result']['description']
+            up = hasil['result']['uploader']
+            bot.send_video(chat_id, hasil['result']['link'])
+            bot.send_message(chat_id, "Judul : "+judul+"\nDesc : "+desc+"\nUploader : "+up)
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+        
+@bot.message_handler(commands=['stalktiktok'])
+def send_tiktok(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/stalktiktok/"+cari[1]
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            user = hasil['result']['username']
+            nick = hasil['result']['nickname']
+            bio = hasil['result']['bio']
+            foll = hasil['result']['followers']
+            back = hasil['result']['followings']
+            likes = hasil['result']['likes']
+            video = hasil['result']['video']
+            bot.send_photo(chat_id, hasil['result']['user_picture'], "Username : "+user+"\nNickname : "+nick+"\nBio : "+bio+"\nPengikut : "+str(foll)+"\nMengikuti : "+str(back)+"\nLikes : "+str(likes)+"\nVideo : "+str(video))
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+
+@bot.message_handler(commands=['stalkig'])
+def send_stalkig(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/stalkig/"+cari[1]
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            user = hasil['result']['username']
+            nick = hasil['result']['fullname']
+            bio = hasil['result']['bio']
+            foll = hasil['result']['followers']
+            back = hasil['result']['following']
+            post = hasil['result']['posts']
+            bot.send_photo(chat_id, hasil['result']['photo_profile'], "Username : "+user+"\nFullname : "+nick+"\nBio : "+bio+"\nPengikut : "+str(foll)+"\nMengikuti : "+str(back)+"\nPost : "+str(post))
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+
 while True:
-  try:
-    print(str(datetime.datetime.now().hour)+'.'+str(datetime.datetime.now().minute)+' ==> Bot Running....')
-    bot.polling()
-  except:
-    bot.stop_polling()
+    try:
+        print(str(datetime.datetime.now().hour)+'.'+str(datetime.datetime.now().minute)+' ==> Bot Running....')
+        bot.polling()
+    except:
+        bot.stop_polling()
