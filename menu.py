@@ -53,6 +53,11 @@ _DOWNLOADER_
 */ig [link-postingan]* = Mendownload video dari instagram.
 */twt [link-video]* = Mendownload video dari twitter.
 */souncloud [link]* = Mendownload lagu dari soundcloud.
+*/tiktokmp4 [link]* = Mendownload video dari tiktok.
+
+_STALKER_
+*/stalkig [username]* = Stalking akun instagram melalui username.
+*/stalktiktok [username]* = Stalking akun tiktok melalui username.
 
 
 _note_ : ``` Jika dalam perintah terdapat (spasi) harap digunakan!.```
