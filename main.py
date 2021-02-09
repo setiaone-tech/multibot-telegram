@@ -686,6 +686,23 @@ def send_stalkig(message):
             bot.send_message(chat_id, hasil['message'])
     else:
         bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+        
+@bot.message_handler(commands=['komen'])
+def send_komen(message):
+    chat_id = message.chat.id
+    me = 617998203
+    user = message.chat.username
+    bagi = message.text
+    hasil = bagi.split(" ",1)
+    bot.send_message(me, "ID : "+str(chat_id)+"\nUsername : "+user+"\nKomen : "+hasil[1])
+    
+@bot.message_handler(commands=['balas'])
+def send_balas(message):
+    bagi = message.text
+    hasil = bagi.split(" ",2)
+    you = hasil[1]
+    pesan = hasil[2]
+    bot.send_message(you, pesan)
 
 while True:
     try:
