@@ -59,6 +59,9 @@ _STALKER_
 */stalkig [username]* = Stalking akun instagram melalui username.
 */stalktiktok [username]* = Stalking akun tiktok melalui username.
 
+_SARAN/KELUHAN_
+*/komen [pesan]* = Jika ada keluhan mengenai BOT ataupun saran yang ingin disampaikan, bisa menggunakan command ini.
+
 
 _note_ : ``` Jika dalam perintah terdapat (spasi) harap digunakan!.```
          ``` [id-yt] adalah id dalam url youtube, contoh link https://youtu.be/CEKTES maka id CEKTES```
