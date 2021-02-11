@@ -20,7 +20,8 @@ def log(message):
     log_bot.close()
     
 
-api = "API-KEY"
+api = "1308184622:AAHXswbVtZaCEe1cKxJ9bmubS-uEdq1ygWs"
+apikey = "c575e69107640a760ad21c7f"
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -46,7 +47,7 @@ def send_wiki(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/wiki/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/wiki/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_message(chat_id, hasil['result'])
@@ -61,7 +62,7 @@ def send_brainly(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/brainly/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/brainly/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             teks = ""
@@ -79,7 +80,7 @@ def send_lirik(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/lirik/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/lirik/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             split_text = util.split_string(hasil['result'], 3000)
@@ -99,7 +100,7 @@ def send_cuaca(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/cuaca/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/cuaca/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             place = hasil['result']['tempat']
@@ -124,7 +125,7 @@ def send_sholat(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/sholat/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/sholat/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             place = hasil['result']['wilayah']
@@ -146,7 +147,7 @@ def send_sholat(message):
 @bot.message_handler(commands=['meme'])
 def send_meme(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/meme"
+    url = "http://lolhuman.herokuapp.com/api/random/meme"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -156,7 +157,7 @@ def send_meme(message):
 @bot.message_handler(commands=['quotes'])
 def send_quotes(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/quotes"
+    url = "http://lolhuman.herokuapp.com/api/random/quotes"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "Tokoh : {}\n\nQuotes : {}".format(hasil['result']['by'], hasil['result']['quote']))
@@ -169,7 +170,7 @@ def send_artinama(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/artinama/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/artinama/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_message(chat_id, hasil['result'])
@@ -184,7 +185,7 @@ def send_jodoh(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/jodoh/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/jodoh/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_photo(chat_id, hasil['result']['image'], "Positif : "+hasil['result']['positif']+"\n\nNegatif : "+hasil['result']['negatif']+"\n\nKeterangan : "+hasil['result']['deskripsi'])
@@ -199,7 +200,7 @@ def send_weton(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",3)
-        url = "http://lolhuman.herokuapp.com/api/weton/"+cari[1]+"/"+cari[2]+"/"+cari[3]
+        url = "http://lolhuman.herokuapp.com/api/weton/"+cari[1]+"/"+cari[2]+"/"+cari[3]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_message(chat_id, "Weton : {}\n\nKarakter : {}\n\nPekerjaan : {}\n\nRejeki : {}\n\nJodoh : {}".format(hasil['result']['weton'], hasil['result']['karakter'], hasil['result']['pekerjaan'], hasil['result']['rejeki'], hasil['result']['jodoh']))
@@ -214,7 +215,7 @@ def send_jadian(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",3)
-        url = "http://lolhuman.herokuapp.com/api/jadian/"+cari[1]+"/"+cari[2]+"/"+cari[3]
+        url = "http://lolhuman.herokuapp.com/api/jadian/"+cari[1]+"/"+cari[2]+"/"+cari[3]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_message(chat_id, "Karakteristik : {}\n\nKeterangan : {}".format(hasil['result']['karakteristik'], hasil['result']['deskripsi']))
@@ -226,7 +227,7 @@ def send_jadian(message):
 @bot.message_handler(commands=['quotenime'])
 def send_quotenime(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/quotesnime"
+    url = "http://lolhuman.herokuapp.com/api/random/quotesnime"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "Quotes : {}\n\nKarakter : {}\n\nJudul : {}".format(hasil['result']['quote'], hasil['result']['character'], hasil['result']['anime']))
@@ -236,7 +237,7 @@ def send_quotenime(message):
 @bot.message_handler(commands=['faktaunik'])
 def send_faktaunik(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/faktaunik"
+    url = "http://lolhuman.herokuapp.com/api/random/faktaunik"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "Faktanyaa {}".format(hasil['result']))
@@ -246,7 +247,7 @@ def send_faktaunik(message):
 @bot.message_handler(commands=['bijak'])
 def send_bijak(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/katabijak"
+    url = "http://lolhuman.herokuapp.com/api/random/katabijak"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "{}".format(hasil['result']))
@@ -256,7 +257,7 @@ def send_bijak(message):
 @bot.message_handler(commands=['pantun'])
 def send_pantun(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/pantun"
+    url = "http://lolhuman.herokuapp.com/api/random/pantun"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "{}".format(hasil['result']))
@@ -266,7 +267,7 @@ def send_pantun(message):
 @bot.message_handler(commands=['bucin'])
 def send_bucin(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/bucin"
+    url = "http://lolhuman.herokuapp.com/api/random/bucin"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "{}".format(hasil['result']))
@@ -276,7 +277,7 @@ def send_bucin(message):
 @bot.message_handler(commands=['bucinn'])
 def send_bucinn(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/katabucin"
+    url = "http://lolhuman.herokuapp.com/api/random/katabucin"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_message(chat_id, "{}".format(hasil['result']))
@@ -289,7 +290,7 @@ def send_twt(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/twitter?url="+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/twitter?url="+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_video(chat_id, hasil['result'][1]['link'])
@@ -302,7 +303,7 @@ def send_twt(message):
 def send_wancak(message):
     chat_id = message.chat.id
     nam = message.chat.first_name
-    url = "http://lolhuman.herokuapp.com/api/onecak"
+    url = "http://lolhuman.herokuapp.com/api/onecak"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers)
     if type(hasil.content) == bytes:
         im = Image.open(BytesIO(hasil.content))
@@ -315,7 +316,7 @@ def send_wancak(message):
 @bot.message_handler(commands=['bts'])
 def send_bts(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/bts"
+    url = "http://lolhuman.herokuapp.com/api/random/bts"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -325,7 +326,7 @@ def send_bts(message):
 @bot.message_handler(commands=['exo'])
 def send_exo(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/exo"
+    url = "http://lolhuman.herokuapp.com/api/random/exo"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -335,7 +336,7 @@ def send_exo(message):
 @bot.message_handler(commands=['blackpink'])
 def send_blackpink(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/blackpink"
+    url = "http://lolhuman.herokuapp.com/api/random/blackpink"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -345,7 +346,7 @@ def send_blackpink(message):
 @bot.message_handler(commands=['animefanart'])
 def send_animefn(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/art"
+    url = "http://lolhuman.herokuapp.com/api/random/art"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -355,7 +356,7 @@ def send_animefn(message):
 @bot.message_handler(commands=['wpanime'])
 def send_wpanime(message):
     chat_id = message.chat.id
-    url = "http://lolhuman.herokuapp.com/api/random/wallnime"
+    url = "http://lolhuman.herokuapp.com/api/random/wallnime"+"?apikey="+apikey
     hasil = ses.get(url, headers=headers).json()
     if hasil['status'] == 200:
         bot.send_photo(chat_id, hasil['result'])
@@ -368,7 +369,7 @@ def send_wpsearch(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/wallpaper/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/wallpaper/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_photo(chat_id, hasil['result'])
@@ -383,7 +384,7 @@ def send_pinterest(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/pinterest/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/pinterest/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_photo(chat_id, hasil['result'])
@@ -399,7 +400,7 @@ def send_phub(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/pornhub/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/pornhub/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("phub/"+nam+"ph.png")
@@ -415,7 +416,7 @@ def send_glitch(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/glitch/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/glitch/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("glitch/"+nam+"gl.png")
@@ -431,7 +432,7 @@ def send_avenger(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/avenger/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/avenger/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("avenger/"+nam+"av.png")
@@ -447,7 +448,7 @@ def send_space(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/space/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/space/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("space/"+nam+"sp.png")
@@ -463,7 +464,7 @@ def send_ninja(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/ninjalogo/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/ninjalogo/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("ninja/"+nam+"nj.png")
@@ -479,7 +480,7 @@ def send_marvel(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/marvelstudio/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/marvelstudio/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("marvel/"+nam+"mvl.png")
@@ -495,7 +496,7 @@ def send_lion(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/lionlogo/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/lionlogo/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("lion/"+nam+"lion.png")
@@ -511,7 +512,7 @@ def send_wolf(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/wolflogo/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/wolflogo/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("wolf/"+nam+"wolf.png")
@@ -527,7 +528,7 @@ def send_steel3d(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",2)
-        url = "http://lolhuman.herokuapp.com/api/textprome/steel3d/"+cari[1]+"/"+cari[2]
+        url = "http://lolhuman.herokuapp.com/api/textprome/steel3d/"+cari[1]+"/"+cari[2]+"?apikey="+apikey
         hasil = ses.get(url).content
         with Image.open(BytesIO(hasil)) as im:
             im.save("steel/"+nam+"steel.png")
@@ -542,7 +543,7 @@ def send_ytaudio(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/ytaudio/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/ytaudio/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             judul = hasil['title']
@@ -561,7 +562,7 @@ def send_ytvideo(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/ytvideo/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/ytvideo/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             judul = hasil['title']
@@ -581,7 +582,7 @@ def send_joox(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/joox/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/joox/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             penyanyi = hasil['result']['info']['singer']
@@ -601,7 +602,7 @@ def send_ig(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/instagram?url="+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/instagram?url="+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_video(chat_id, hasil['result'])
@@ -616,7 +617,7 @@ def send_soundcloud(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/soundcloud?url="+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/soundcloud?url="+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             bot.send_audio(chat_id, hasil['result'], hasil['title'])
@@ -631,7 +632,7 @@ def send_tiktokmp4(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/tiktok?url="+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/tiktok?url="+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             judul = hasil['result']['title']
@@ -650,7 +651,7 @@ def send_tiktok(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/stalktiktok/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/stalktiktok/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             user = hasil['result']['username']
@@ -672,7 +673,7 @@ def send_stalkig(message):
     bagi = message.text
     if " " in bagi:
         cari = bagi.split(" ",1)
-        url = "http://lolhuman.herokuapp.com/api/stalkig/"+cari[1]
+        url = "http://lolhuman.herokuapp.com/api/stalkig/"+cari[1]+"?apikey="+apikey
         hasil = ses.get(url).json()
         if hasil['status'] == 200:
             user = hasil['result']['username']
