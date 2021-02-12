@@ -6,22 +6,23 @@ from io import BytesIO
 import datetime
 from telebot import util
 import random
+import pandas as pd
 
 ses = requests.session()
 
 def log(message):
     user = message.chat.username
     nama_awal = message.chat.first_name
-    nama_akhir = message.chat.last_name
+    id_chat = message.chat.id
     ttd = datetime.datetime.now().strftime('%d-%B-%Y')
-    text_log = '{}, {}, {}, {}\n'.format(ttd, user, nama_awal, nama_akhir)
+    text_log = '{}, {}, {}, {}\n'.format(ttd, user, nama_awal, id_chat)
     log_bot = open('log_bot.txt', 'a')
     log_bot.write(text_log)
     log_bot.close()
     
 
-api = "1308184622:AAHXswbVtZaCEe1cKxJ9bmubS-uEdq1ygWs"
-apikey = "c575e69107640a760ad21c7f"
+api = "API-KEY Telegram"
+apikey = "API-KEY" #get your api-key on lolhuman.herokuapp.com
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -704,6 +705,17 @@ def send_balas(message):
     you = hasil[1]
     pesan = hasil[2]
     bot.send_message(you, pesan)
+    
+@bot.message_handler(commands=['update'])
+def send_update(message):
+    bagi = message.text
+    hasil = bagi.split(" ",1)
+    df = pd.read_csv('log_bot.txt', delimiter=',')
+    lst = [list(row) for row in df.values]
+    for i in range(len(lst)):
+        bot.send_message(lst[i][3], hasil[1])
+    bot.send_message(message.chat.id, "Selesai!")
+    
 
 while True:
     try:
