@@ -21,8 +21,8 @@ def log(message):
     log_bot.close()
     
 
-api = "API-KEY Telegram"
-apikey = "API-KEY" #get your api-key on lolhuman.herokuapp.com
+api = "API-KEY Telegram" #get your api-key on bot father
+apikey = "API-KEY feature" #get your api-key on lolhuman.herokuapp.com
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -712,9 +712,52 @@ def send_update(message):
     hasil = bagi.split(" ",1)
     df = pd.read_csv('log_bot.txt', delimiter=',')
     lst = [list(row) for row in df.values]
+    new = []
     for i in range(len(lst)):
-        bot.send_message(lst[i][3], hasil[1])
+        if lst[i][3] not in new:
+            new.append(lst[i][3])
+    for j in range(len(new)):
+        bot.send_message(j, hasil[1])
     bot.send_message(message.chat.id, "Selesai!")
+    
+@bot.message_handler(commands=['char'])
+def send_char(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/character/"+cari[1]+"?apikey="+apikey
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            nama = "{}({})".format(hasil['result']['name']['full'], hasil['result']['name']['native'])
+            desc = hasil['result']['description']
+            film = ""
+            for i in range(len(hasil['result']['media']['nodes'])):
+                film += ".{}({})\n".format(hasil['result']['media']['nodes'][i]['title']['romaji'], hasil['result']['media']['nodes'][i]['title']['native'])
+            bot.send_photo(chat_id,  hasil['result']['image']['large'])
+            bot.send_message(chat_id, "*Nama* : \n"+str(nama)+"\n\n*Deskripsi* : \n"+str(desc)+"\n\n*Film* : \n"+str(film), parse_mode="Markdown")
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+        
+@bot.message_handler(commands=['tv'])
+def send_tv(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/jadwaltv/"+cari[1]+"?apikey="+apikey
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            jadwal = ""
+            for i, j in hasil['result'].items():
+                jadwal += "{} : {}\n".format(i, j)
+            bot.send_message(chat_id, jadwal)
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
     
 
 while True:
