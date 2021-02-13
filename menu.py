@@ -6,6 +6,7 @@ _INFORMATION_
 */lirik [judul]* = Mencari lirik lagu berdasarkan judul.
 */cuaca [daerah]* = Menampilkan cuaca di daerah berdasarkan pencarian.
 */sholat [daerah]* = Menampilkan jadwal sholat di daerah berdasarkan pencarian.
+*/tv [channel]* = Menampilkan jadwal channel tv nasional berdasarkan pencarian.
 
 _ENTERTAINTMENT_
 */meme* = Random meme.
@@ -58,6 +59,9 @@ _DOWNLOADER_
 _STALKER_
 */stalkig [username]* = Stalking akun instagram melalui username.
 */stalktiktok [username]* = Stalking akun tiktok melalui username.
+
+_ANIMANGA_
+*/char [character]* = Mencari karakter dari anime/manga berdasarkan pencarian.
 
 _SARAN/KELUHAN_
 */komen [pesan]* = Jika ada keluhan mengenai BOT ataupun saran yang ingin disampaikan, bisa menggunakan command ini.
