@@ -21,8 +21,8 @@ def log(message):
     log_bot.close()
     
 
-api = "API-KEY Telegram" #get your api-key on bot father
-apikey = "API-KEY feature" #get your api-key on lolhuman.herokuapp.com
+api = "1557818563:AAFl9hb7mRPtXbJxD6l3LOsM8ynmbEFPGGc" #get your api-key on bot father
+apikey = "c575e69107640a760ad21c7f" #get your api-key on lolhuman.herokuapp.com
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
