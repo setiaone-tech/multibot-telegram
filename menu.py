@@ -62,6 +62,11 @@ _STALKER_
 
 _ANIMANGA_
 */char [character]* = Mencari karakter dari anime/manga berdasarkan pencarian.
+*/kusonime [link-kusonime]* = Mencari link download dari kusonime berdasarkan link.
+
+_CREATOR_
+*/quotemaker [teks]* = Membuat quotes berdasarkan teks.
+*/nulis [teks]* = Mengubah teks seperti tulisan tangan seperti di buku.
 
 _SARAN/KELUHAN_
 */komen [pesan]* = Jika ada keluhan mengenai BOT ataupun saran yang ingin disampaikan, bisa menggunakan command ini.
