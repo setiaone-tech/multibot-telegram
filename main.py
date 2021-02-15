@@ -21,8 +21,8 @@ def log(message):
     log_bot.close()
     
 
-api = "API-KEY Telegram Bot" #get your api-key on bot father
-apikey = "API-KEY Feature" #get your api-key on lolhuman.herokuapp.com
+api = "API-KEY Telegram Bot" #API-KEY FROM BOT FATHER
+apikey = "API-KEY Feature" #API-KEY FROM LOLHUMAN
 bot = telebot.TeleBot(api, threaded = False)
 headers = {
         'Cache-Control':'max-age=0'
@@ -758,11 +758,68 @@ def send_tv(message):
             bot.send_message(chat_id, hasil['message'])
     else:
         bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
-    
+        
+@bot.message_handler(commands=['kusonime'])
+def send_kusonime(message):
+    chat_id = message.chat.id
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/kusonime?apikey="+apikey+"&url="+cari[1]
+        hasil = ses.get(url).json()
+        if hasil['status'] == 200:
+            judul = []
+            link = ""
+            for i in hasil['result']['link_dl']:
+                judul.append(i)
+            for j in judul:
+                isi = ""
+                for k, i in hasil['result']['link_dl'][j].items():
+                    isi += "{} : {}\n".format(k, i)
+                link += "{} :\n{}\n".format(j, isi)
+            bot.send_photo(chat_id, hasil['result']['thumbnail'])
+            bot.send_message(chat_id, "*Judul* : \n{}({})\n*Genre* : \n{}\n*Total Episode* : \n{}\n*Durasi* : \n{}\n*Deskripsi* : \n{}".format(hasil['result']['title'], hasil['result']['japanese'], hasil['result']['genre'], hasil['result']['total_episode'], hasil['result']['duration'], hasil['result']['desc']), parse_mode="Markdown")
+            bot.send_message(chat_id, link)
+        else:
+            bot.send_message(chat_id, hasil['message'])
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+        
+@bot.message_handler(commands=['quotemaker'])
+def send_quotemaker(message):
+    chat_id = message.chat.id
+    nam = message.chat.first_name
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/quotemaker?apikey="+apikey+"&text="+cari[1]
+        hasil = ses.get(url).content
+        with Image.open(BytesIO(hasil)) as im:
+            im.save("quote/"+nam+"maker.png")
+            photo = open('quote/'+nam+'maker.png', 'rb')
+            bot.send_photo(chat_id, photo)
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
+        
+@bot.message_handler(commands=['quotemaker'])
+def send_quotemaker(message):
+    chat_id = message.chat.id
+    nam = message.chat.first_name
+    bagi = message.text
+    if " " in bagi:
+        cari = bagi.split(" ",1)
+        url = "http://lolhuman.herokuapp.com/api/nulis?apikey="+apikey+"&text="+cari[1]
+        hasil = ses.get(url).content
+        with Image.open(BytesIO(hasil)) as im:
+            im.save("nulis/"+nam+"tulis.png")
+            photo = open('quote/'+nam+'tulis.png', 'rb')
+            bot.send_photo(chat_id, photo)
+    else:
+        bot.send_message(chat_id, "Perintah salah! Harap gunakan spasi!")
 
 while True:
-    try:
-        print(str(datetime.datetime.now().hour)+'.'+str(datetime.datetime.now().minute)+' ==> Bot Running....')
-        bot.polling()
-    except:
-        bot.stop_polling()
+        try:
+            print(str(datetime.datetime.now().hour)+'.'+str(datetime.datetime.now().minute)+' ==> Bot Running....')
+            bot.polling()
+        except:
+            bot.stop_polling()
